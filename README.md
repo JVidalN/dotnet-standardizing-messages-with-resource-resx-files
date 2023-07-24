@@ -1,4 +1,4 @@
-# Project Title
+# Standardizing validation and error messages using Resource (.resx) files in .NET
 
 ## Introduction
 
