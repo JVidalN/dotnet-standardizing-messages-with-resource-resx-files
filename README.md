@@ -36,7 +36,7 @@ dotnet build
 dotnet run
 ```
 
-The API will start running at **`https://localhost:5001`** (or **`http://localhost:5000`** for HTTP) by default.
+The API will start running at **`https://localhost:7140`** (or **`http://localhost:5041`** for HTTP) by default.
 
 ### Commands Used To Create The Project
 
