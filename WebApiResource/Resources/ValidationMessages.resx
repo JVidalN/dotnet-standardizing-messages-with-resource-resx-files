@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <root>
     <data name="Length" xml:space="preserve">
-        <value>The field {0} must be between {1} and {2} characters.</value>
+        <value>The field {0} length must be between {2} and {1}.</value>
     </data>
     <data name="Email" xml:space="preserve">
         <value>The field {0} is an invalid email address.</value>

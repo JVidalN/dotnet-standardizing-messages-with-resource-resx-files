@@ -67,7 +67,7 @@ namespace WebApiResource.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The field {0} must be between {1} and {2} characters..
+        ///   Looks up a localized string similar to The field {0} length must be between {2} and {1}..
         /// </summary>
         internal static string Length {
             get {
