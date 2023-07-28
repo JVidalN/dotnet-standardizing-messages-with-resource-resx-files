@@ -1,3 +1,4 @@
+using System.Net;
 using Microsoft.AspNetCore.Mvc;
 using WebApiResource.Models;
 
@@ -15,7 +16,14 @@ public class UserController : ControllerBase
     [HttpPost]
     public IActionResult Post([FromBody] User userModel)
     {
-        // throw new HttpRequestException("", null, HttpStatusCode.Forbidden);
-        return Ok(userModel);
+        try
+        {
+            throw new HttpRequestException("", null, HttpStatusCode.Forbidden);
+            return Ok(userModel);
+        }
+        catch (Exception)
+        {
+            throw;
+        }
     }
 }

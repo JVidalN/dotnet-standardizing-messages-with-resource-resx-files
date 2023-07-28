@@ -1,35 +1,39 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
-using System.Resources;
 using WebApiResource.Resources;
 
 namespace WebApiResource.Filters
 {
-    public class ResourceExceptionFilter : ExceptionFilterAttribute
+    public class ResourceErrorFilter : ExceptionFilterAttribute
     {
-        private static readonly ResourceManager _resourceManager = new(typeof(ErrorMessages));
+        private readonly MessageResourceContext _messageResourceContext;
+
+        public ResourceErrorFilter(MessageResourceContext messageResourceFactory)
+        {
+            _messageResourceContext = messageResourceFactory;
+        }
 
         public override void OnException(ExceptionContext context)
         {
             var statusCode = GetHttpStatusCodeFromException(context);
 
             var errorMessage = GetErrorMessage(statusCode);
-            context.Result = new ObjectResult(new
+
+            var returnPattern = new
             {
                 title = "One or more errors occurred.",
                 status = statusCode,
                 message = errorMessage,
-            })
-            {
-                StatusCode = statusCode,
             };
+
+            context.Result = new ObjectResult(returnPattern) { StatusCode = statusCode };
 
             context.ExceptionHandled = true;
         }
 
-        private static string GetErrorMessage(int statusCode)
+        private string GetErrorMessage(int statusCode)
         {
-            string errorMessage = _resourceManager.GetString(name: $"{statusCode}");
+            string errorMessage = _messageResourceContext.GetMessage(statusCode.ToString());
 
             return string.IsNullOrEmpty(errorMessage) ? "Internal Server Error" : errorMessage;
         }
