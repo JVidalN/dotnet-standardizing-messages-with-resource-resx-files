@@ -16,6 +16,6 @@ public class User
     public required string Email { get; set; }
 
     [DisplayName("Description")]
-    [Range(minimum: 5, maximum: 10, ErrorMessageResourceName = "Length", ErrorMessageResourceType = typeof(ValidationMessages))]
+    [StringLength(maximumLength: 10, MinimumLength = 5, ErrorMessageResourceName = "Length", ErrorMessageResourceType = typeof(ValidationMessages))]
     public string? Description { get; set; }
 }
