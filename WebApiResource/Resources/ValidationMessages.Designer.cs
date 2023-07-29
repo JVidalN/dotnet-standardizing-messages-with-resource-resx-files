@@ -58,25 +58,16 @@ namespace WebApiResource.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The field {0} is an invalid email address..
+        ///   Looks up a localized string similar to [Custom Validation]: The field ´{0}´ is an invalid email address..
         /// </summary>
-        internal static string Email {
+        internal static string EmailAddress {
             get {
-                return ResourceManager.GetString("Email", resourceCulture);
+                return ResourceManager.GetString("EmailAddress", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The field {0} length must be between {2} and {1}..
-        /// </summary>
-        internal static string Length {
-            get {
-                return ResourceManager.GetString("Length", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to The field {0} must be a valid number..
+        ///   Looks up a localized string similar to [Custom Validation]: The field ´{0}´ must be a valid number..
         /// </summary>
         internal static string NumberType {
             get {
@@ -85,11 +76,20 @@ namespace WebApiResource.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The field {0} is required..
+        ///   Looks up a localized string similar to [Custom Validation]: The field ´{0}´ is required..
         /// </summary>
         internal static string Required {
             get {
                 return ResourceManager.GetString("Required", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to [Custom Validation]: The field ´{0}´ length must be between {2} and {1}..
+        /// </summary>
+        internal static string StringLength {
+            get {
+                return ResourceManager.GetString("StringLength", resourceCulture);
             }
         }
     }

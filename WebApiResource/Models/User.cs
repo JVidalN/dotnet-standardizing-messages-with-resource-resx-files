@@ -7,15 +7,16 @@ namespace WebApiResource.Models;
 public class User
 {
     [DisplayName("Name")]
-    [Required(ErrorMessageResourceName = "Required", ErrorMessageResourceType = typeof(ValidationMessages))]
+    [Required]
     public required string Name { get; set; }
 
     [DisplayName("Email")]
-    [Required(ErrorMessageResourceName = "Required", ErrorMessageResourceType = typeof(ValidationMessages))]
-    [EmailAddress(ErrorMessageResourceName = "Email", ErrorMessageResourceType = typeof(ValidationMessages))]
-    public required string Email { get; set; }
+    [Required]
+    [EmailAddress]
+    public string Email { get; set; }
 
     [DisplayName("Description")]
-    [StringLength(maximumLength: 10, MinimumLength = 5, ErrorMessageResourceName = "Length", ErrorMessageResourceType = typeof(ValidationMessages))]
+    [Required]
+    [StringLength(maximumLength: 10, MinimumLength = 5)]
     public string? Description { get; set; }
 }

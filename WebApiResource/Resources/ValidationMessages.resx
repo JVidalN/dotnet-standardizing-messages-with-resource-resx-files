@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <root>
-    <data name="Length" xml:space="preserve">
-        <value>The field {0} length must be between {2} and {1}.</value>
+    <data name="StringLength" xml:space="preserve">
+        <value>[Custom Validation]: The field ´{0}´ length must be between {2} and {1}.</value>
     </data>
-    <data name="Email" xml:space="preserve">
-        <value>The field {0} is an invalid email address.</value>
+    <data name="EmailAddress" xml:space="preserve">
+        <value>[Custom Validation]: The field ´{0}´ is an invalid email address.</value>
     </data>
     <data name="Required" xml:space="preserve">
-        <value>The field {0} is required.</value>
+        <value>[Custom Validation]: The field ´{0}´ is required.</value>
     </data>
     <data name="NumberType" xml:space="preserve">
-        <value>The field {0} must be a valid number.</value>
+        <value>[Custom Validation]: The field ´{0}´ must be a valid number.</value>
     </data>
     <!-- Add more resource entries as needed -->
 </root>

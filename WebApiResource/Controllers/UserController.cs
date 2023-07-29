@@ -18,7 +18,7 @@ public class UserController : ControllerBase
     {
         try
         {
-            throw new HttpRequestException("", null, HttpStatusCode.Forbidden);
+            // throw new HttpRequestException("", null, HttpStatusCode.NotFound);
             return Ok(userModel);
         }
         catch (Exception)

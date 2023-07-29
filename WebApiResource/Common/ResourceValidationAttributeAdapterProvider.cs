@@ -1,69 +1,33 @@
 using System.ComponentModel.DataAnnotations;
-using System.Resources;
-using Microsoft.AspNetCore.Mvc.DataAnnotations;
-using Microsoft.Extensions.Localization;
 using WebApiResource.Resources;
+using Microsoft.AspNetCore.Mvc.ModelBinding.Metadata;
 
-public class ResourceValidationAttributeAdapterProvider : IValidationAttributeAdapterProvider
+namespace WebApiResource.AttributeAdapterProvider;
+
+public class ResourceValidationAttributeAdapterProvider : IValidationMetadataProvider
 {
-    private readonly IValidationAttributeAdapterProvider _baseProvider;
     private readonly MessageResourceContext _messageResourceContext;
 
-    public ResourceValidationAttributeAdapterProvider(IValidationAttributeAdapterProvider baseProvider, MessageResourceContext messageResourceFactory)
+    public ResourceValidationAttributeAdapterProvider(MessageResourceContext messageResourceContext)
     {
-        _baseProvider = baseProvider;
-        _messageResourceContext = messageResourceFactory;
+        _messageResourceContext = messageResourceContext;
     }
 
-    public IAttributeAdapter GetAttributeAdapter(ValidationAttribute attribute, IStringLocalizer stringLocalizer)
+    public void CreateValidationMetadata(ValidationMetadataProviderContext context)
     {
-        if (attribute is RequiredAttribute requiredAttribute)
+        if (context.ValidationMetadata.ValidatorMetadata.Any())
         {
-            var resourceManager = _messageResourceContext.GetMessage(name);
-            return new RequiredAttributeAdapter(requiredAttribute, _messageResourceContext);
+            foreach (var attribute in context.ValidationMetadata.ValidatorMetadata)
+            {
+                if (attribute is ValidationAttribute typedAttribute)
+                {
+                    var name = typedAttribute.GetType().Name.Replace("Attribute", "");
+                    string validationMessage = _messageResourceContext.GetMessage(name);
+
+                    typedAttribute.ErrorMessage = validationMessage ?? typedAttribute.ErrorMessage;
+                }
+            }
         }
 
-        if (attribute is StringLengthAttribute stringLengthAttribute)
-        {
-            var resourceManager = _resourceManagerFactory.Create(typeof(ValidationMessages));
-            return new StringLengthAttributeAdapter(stringLengthAttribute, resourceManager);
-        }
-
-        // Add more custom attribute adapters as needed
-
-        return _baseProvider.GetAttributeAdapter(attribute, stringLocalizer);
     }
-
-    private class RequiredAttributeAdapter : AttributeAdapterBase<RequiredAttribute>
-    {
-        public RequiredAttributeAdapter(RequiredAttribute attribute, ResourceManager resourceManager)
-            : base(attribute, resourceManager)
-        {
-        }
-    }
-
-    private class StringLengthAttributeAdapter : AttributeAdapterBase<StringLengthAttribute>
-    {
-        public StringLengthAttributeAdapter(StringLengthAttribute attribute, ResourceManager resourceManager)
-            : base(attribute, resourceManager)
-        {
-        }
-    }
-
-// public LocalizedValidationAttributeAdapterProvider(IValidationAttributeAdapterProvider baseProvider, IStringLocalizer<ValidationMessages> localizer)
-// {
-//     _baseProvider = baseProvider;
-//     _localizer = localizer;
-// }
-
-// public IAttributeAdapter GetAttributeAdapter(ValidationAttribute attribute, IStringLocalizer stringLocalizer)
-// {
-//     var baseAdapter = _baseProvider.GetAttributeAdapter(attribute, stringLocalizer);
-
-//     if (baseAdapter is ValidationAttributeAdapter adapter)
-//     {
-//         adapter.Attribute.ErrorMessage = _resourceManager.GetString(name: adapter.Attribute.ErrorMessage);
-//     }
-//     return baseAdapter;
-// }
-// }
+}

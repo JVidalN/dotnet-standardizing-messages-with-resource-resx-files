@@ -2,22 +2,24 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 using WebApiResource.Resources;
 
-namespace WebApiResource.Filters
+namespace WebApiResource.Filters;
+
+public class ResourceErrorFilter : ExceptionFilterAttribute
 {
-    public class ResourceErrorFilter : ExceptionFilterAttribute
+    private readonly MessageResourceContext _messageResourceContext;
+
+    public ResourceErrorFilter(MessageResourceContext messageResourceContext)
     {
-        private readonly MessageResourceContext _messageResourceContext;
+        _messageResourceContext = messageResourceContext;
+    }
 
-        public ResourceErrorFilter(MessageResourceContext messageResourceFactory)
+    public override void OnException(ExceptionContext context)
+    {
+
+        if (!context.ExceptionHandled)
         {
-            _messageResourceContext = messageResourceFactory;
-        }
-
-        public override void OnException(ExceptionContext context)
-        {
-            var statusCode = GetHttpStatusCodeFromException(context);
-
-            var errorMessage = GetErrorMessage(statusCode);
+            int statusCode = GetStatusCodeFromException(context.Exception);
+            string errorMessage = _messageResourceContext.GetMessage(statusCode.ToString());
 
             var returnPattern = new
             {
@@ -30,24 +32,19 @@ namespace WebApiResource.Filters
 
             context.ExceptionHandled = true;
         }
+    }
 
-        private string GetErrorMessage(int statusCode)
+
+    private static int GetStatusCodeFromException(Exception exception)
+    {
+        if (exception is HttpRequestException httpRequestException)
         {
-            string errorMessage = _messageResourceContext.GetMessage(statusCode.ToString());
-
-            return string.IsNullOrEmpty(errorMessage) ? "Internal Server Error" : errorMessage;
-        }
-
-        private static int GetHttpStatusCodeFromException(ExceptionContext context)
-        {
-            if (context.Exception is HttpRequestException httpRequestException)
+            if (httpRequestException.StatusCode.HasValue)
             {
-                if (httpRequestException.StatusCode.HasValue)
-                {
-                    return (int)httpRequestException.StatusCode.Value;
-                }
+                return (int)httpRequestException.StatusCode.Value;
             }
-            return 500;
         }
+        return 500;
     }
 }
+
