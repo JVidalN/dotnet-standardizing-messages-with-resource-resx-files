@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <root>
     <data name="400" xml:space="preserve">
-        <value>Invalid request. Please provide valid data.</value>
+        <value>[Custom Error]: Invalid request. Please provide valid data.</value>
     </data>
     <data name="401" xml:space="preserve">
-        <value>Authentication required. Please provide valid credentials.</value>
+        <value>[Custom Error]: Authentication required. Please provide valid credentials.</value>
     </data>
     <data name="403" xml:space="preserve">
-        <value>Access denied. You are not authorized to perform this action.</value>
+        <value>[Custom Error]: Access denied. You are not authorized to perform this action.</value>
     </data>
     <data name="404" xml:space="preserve">
-        <value>We couldn't find what you were looking for.</value>
+        <value>[Custom Error]: We couldn't find what you were looking for.</value>
     </data>
     <data name="500" xml:space="preserve">
-        <value>Something went wrong on the server. Please contact the administrator.</value>
+        <value>[Custom Error]: Something went wrong on the server. Please contact the administrator.</value>
     </data>
     <!-- Add more resource entries as needed -->
 </root>

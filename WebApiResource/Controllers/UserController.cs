@@ -1,6 +1,6 @@
+using System.Net;
 using Microsoft.AspNetCore.Mvc;
 using WebApiResource.Models;
-using WebApiResource.Resources;
 
 namespace WebApiResource.Controllers;
 
@@ -18,26 +18,12 @@ public class UserController : ControllerBase
     {
         try
         {
+            // throw new HttpRequestException("", null, HttpStatusCode.NotFound);
             return Ok(userModel);
         }
-        catch (Exception ex)
+        catch (Exception)
         {
-            var statusCode = GetHttpStatusCodeFromException(ex);
-
-            var errorMessage = ErrorMessages.ResourceManager.GetString(name: $"{statusCode}");
-            return StatusCode(statusCode, errorMessage);
+            throw;
         }
-
-    }
-    private static int GetHttpStatusCodeFromException(Exception ex)
-    {
-        if (ex is HttpRequestException httpRequestException)
-        {
-            if (httpRequestException.StatusCode.HasValue)
-            {
-                return (int)httpRequestException.StatusCode.Value;
-            }
-        }
-        return 500;
     }
 }

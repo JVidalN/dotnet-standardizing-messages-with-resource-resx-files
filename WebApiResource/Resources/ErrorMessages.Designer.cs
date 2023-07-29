@@ -58,7 +58,7 @@ namespace WebApiResource.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Invalid request. Please provide valid data..
+        ///   Looks up a localized string similar to [Custom Error]: Invalid request. Please provide valid data..
         /// </summary>
         internal static string _400 {
             get {
@@ -67,7 +67,7 @@ namespace WebApiResource.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Authentication required. Please provide valid credentials..
+        ///   Looks up a localized string similar to [Custom Error]: Authentication required. Please provide valid credentials..
         /// </summary>
         internal static string _401 {
             get {
@@ -76,7 +76,7 @@ namespace WebApiResource.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Access denied. You are not authorized to perform this action..
+        ///   Looks up a localized string similar to [Custom Error]: Access denied. You are not authorized to perform this action..
         /// </summary>
         internal static string _403 {
             get {
@@ -85,7 +85,7 @@ namespace WebApiResource.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to We couldn&apos;t find what you were looking for..
+        ///   Looks up a localized string similar to [Custom Error]: We couldn&apos;t find what you were looking for..
         /// </summary>
         internal static string _404 {
             get {
@@ -94,7 +94,7 @@ namespace WebApiResource.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Something went wrong on the server. Please contact the administrator..
+        ///   Looks up a localized string similar to [Custom Error]: Something went wrong on the server. Please contact the administrator..
         /// </summary>
         internal static string _500 {
             get {
